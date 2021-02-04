@@ -1,7 +1,13 @@
 import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBumps } from "../store/bumps/actionCreators";
+
+
+import { fetchBumps } from "../store/bumps/actions";
+import { fetchTopics } from '../store/topics/actions';
+
 import { selectBumpsItems, selectIsBumpsLoading } from '../store/bumps/selectors';
+import { selectTopicsItems, selectIsTopicsLoading } from '../store/topics/selectors';
+
 
 function Home() {
 
@@ -10,14 +16,17 @@ function Home() {
   React.useEffect(
     () => {
       dispatch(fetchBumps())
+      dispatch(fetchTopics())
     }, [dispatch])
   const bumps = useSelector(selectBumpsItems)
-  const isLoading = useSelector(selectIsBumpsLoading)
+  const topics = useSelector(selectTopicsItems)
+  const isBumpsLoading = useSelector(selectIsBumpsLoading)
+  const isTopicsLoading = useSelector(selectIsTopicsLoading)
 
   return (
     <div>
-      {isLoading ?
-        <div>LOADING</div>
+      {isBumpsLoading ?
+        <div>BUMPS LOADING</div>
         :
         bumps.map(el => {
           return (
@@ -35,6 +44,19 @@ function Home() {
           )
         })
       }
+
+      {isTopicsLoading ?
+        <div>TOPICS LOADING</div>
+        :
+        topics.map(el => {
+          return (
+            <div key={el.name}>
+              <div>{el.name}: {el.count}</div>
+            </div>
+          )
+        })
+      }
+
     </div>
   );
 }

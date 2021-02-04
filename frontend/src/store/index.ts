@@ -4,6 +4,7 @@ import rootReducer from './rootReducer'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from './sagas';
 import { BumpsType } from './bumps/types';
+import { TopicsType } from './topics/types';
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -12,7 +13,8 @@ const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaM
 sagaMiddleware.run(rootSaga)
 
 export type RootStateType = {
-  bumps: BumpsType
+  bumps: BumpsType,
+  topics: TopicsType
 }
 
 export default store

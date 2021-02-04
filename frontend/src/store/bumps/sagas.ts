@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import { BumpsActionsType, setBumps, setBumpsLoadingStatus } from './actionCreators'
+import { BumpsActions, setBumps, setBumpsLoadingStatus } from './actions'
 import { BumpsAPI } from '../../services/api/bumpsAPI'
 import { LoadingStatus } from './types'
 
@@ -15,5 +15,5 @@ export function* fetchBumpsRequest() {
 }
 
 export function* bumpsSaga() {
-  yield takeEvery(BumpsActionsType.FETCH_BUMPS, fetchBumpsRequest)
+  yield takeEvery(BumpsActions.FETCH_BUMPS, fetchBumpsRequest)
 }

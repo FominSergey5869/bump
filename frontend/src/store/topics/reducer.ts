@@ -1,25 +1,25 @@
 import produce, { Draft } from 'immer'
 
-import { BumpsType, LoadingStatus } from './types'
-import { BumpsActionsTypes, BumpsActions } from './actions'
+import { TopicsType, LoadingStatus } from './types'
+import { TopicsActionsTypes, TopicsActions } from './actions'
 
-const initialState: BumpsType = {
+const initialState: TopicsType = {
   items: [],
   loadingStatus: LoadingStatus.NEVER
 }
 
-const bumpsReducer = produce((draft: Draft<BumpsType>, action: BumpsActionsTypes) => {
+const topicsReducer = produce((draft: Draft<TopicsType>, action: TopicsActionsTypes) => {
 
   switch (action.type) {
-    case BumpsActions.SET_BUMPS:
+    case TopicsActions.SET_TOPICS:
       draft.items = action.payload
       draft.loadingStatus = LoadingStatus.LOADED
       break
-    case BumpsActions.FETCH_BUMPS:
+    case TopicsActions.FETCH_TOPICS:
       draft.items = []
       draft.loadingStatus = LoadingStatus.LOADING
       break;
-    case BumpsActions.SET_LOADING_STATUS:
+    case TopicsActions.SET_LOADING_STATUS:
       draft.loadingStatus = action.payload
       break
     default:
@@ -29,4 +29,4 @@ const bumpsReducer = produce((draft: Draft<BumpsType>, action: BumpsActionsTypes
 
 }, initialState)
 
-export default bumpsReducer
+export default topicsReducer
