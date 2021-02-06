@@ -3,7 +3,10 @@ import { BumpType, LoadingStatus } from "./types";
 export enum BumpsActions {
   SET_BUMPS = 'bumps/SET_BUMPS',
   FETCH_BUMPS = 'bumps/FETCH_BUMPS',
-  SET_LOADING_STATUS = 'bumps/SET_LOADING_STATUS'
+  FETCH_ADD_BUMP = 'bumps/FETCH_ADD_BUMP',
+  ADD_BUMP = 'bumps/ADD_BUMP',
+  SET_LOADING_STATUS = 'bumps/SET_LOADING_STATUS',
+  SET_BUMP_LOADING_STATUS = 'bumps/SET_BUMP_LOADING_STATUS'
 }
 
 
@@ -27,6 +30,38 @@ export const fetchBumps = (): FetchBumpsType => ({
 })
 
 
+export type FetchAddBumpType = {
+  type: BumpsActions.FETCH_ADD_BUMP,
+  payload: string
+}
+
+export const fetchAddBump = (payload: string): FetchAddBumpType => ({
+  type: BumpsActions.FETCH_ADD_BUMP,
+  payload
+})
+
+
+export type AddBumpType = {
+  type: BumpsActions.ADD_BUMP,
+  payload: BumpType
+}
+
+export const addBump = (payload: BumpType): AddBumpType => ({
+  type: BumpsActions.ADD_BUMP,
+  payload
+})
+
+
+export type SetBumpLoadingStatusType = {
+  type: BumpsActions.SET_BUMP_LOADING_STATUS,
+  payload: LoadingStatus
+}
+
+export const setBumpLoadingStatus = (payload: LoadingStatus): SetBumpLoadingStatusType => ({
+  type: BumpsActions.SET_BUMP_LOADING_STATUS,
+  payload: payload
+})
+
 
 export type SetBumpsLoadingStatusType = {
   type: BumpsActions.SET_LOADING_STATUS,
@@ -40,6 +75,4 @@ export const setBumpsLoadingStatus = (payload: LoadingStatus): SetBumpsLoadingSt
 
 
 
-
-
-export type BumpsActionsTypes = SetBumpsType | SetBumpsLoadingStatusType | FetchBumpsType
+export type BumpsActionsTypes = SetBumpsType | SetBumpsLoadingStatusType | SetBumpLoadingStatusType | FetchBumpsType | FetchAddBumpType | AddBumpType

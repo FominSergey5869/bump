@@ -17,5 +17,6 @@ export type BumpType = {
 
 export type BumpsType = {
   items: BumpType[],
-  loadingStatus: LoadingStatus
+  loadingStatus: LoadingStatus,
+  addBumpStatus: LoadingStatus
 }

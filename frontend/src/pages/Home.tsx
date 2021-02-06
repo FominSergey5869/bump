@@ -30,7 +30,7 @@ function Home() {
 
   return (
     <div>
-      {!isBumpsLoading ?
+      {isBumpsLoading ?
         <div>BUMPS LOADING</div>
         :
         bumps.map(el => {
@@ -50,7 +50,7 @@ function Home() {
         })
       }
 
-      {!isTopicsLoading ?
+      {isTopicsLoading ?
         <div>TOPICS LOADING</div>
         :
         topics.map(el => {
