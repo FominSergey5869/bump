@@ -1,8 +1,11 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import { validationResult } from 'express-validator'
 import { UserModel } from '../models/UserModel'
 import { generateMD5 } from '../utils/grnrrateHash'
 import { sendEmail } from '../utils/sendEmail'
+
+const isValidObjectId = mongoose.Types.ObjectId.isValid
 
 class UserController {
   async index(_: any, res: express.Response): Promise<void> {
@@ -17,7 +20,35 @@ class UserController {
     } catch (error) {
       res.status(500).json({
         status: 'error',
-        message: JSON.stringify(error)
+        message: error
+      })
+    }
+  }
+
+  async show(req: express.Request, res: express.Response): Promise<void> {
+    try {
+      const userId = req.params.id
+      if(!isValidObjectId(userId)) {
+        res.status(400).send()
+        return
+      }
+
+      const user = await UserModel.findOne({_id: userId}).exec()
+      
+      
+      if(!isValidObjectId(userId)) {
+        res.status(404).send()
+        return
+      }
+      res.json({
+        status: 'succes',
+        data: user
+      })
+
+    } catch (error) {
+      res.status(500).json({
+        status: 'error',
+        message: error
       })
     }
   }
@@ -35,7 +66,7 @@ class UserController {
         email: req.body.email,
         username: req.body.username,
         fullname: req.body.fullname,
-        password: req.body.password,
+        password: generateMD5(req.body.password + process.env.SECRET_KEY ),
         confirmHash: generateMD5(process.env.SECRET_KEY || Math.random().toString())
       }
 
