@@ -13,7 +13,6 @@ class BumpsController {
         status: 'succes',
         data: bumps
       })
-
     } catch (error) {
       res.status(500).json({
         status: 'error',
@@ -44,7 +43,6 @@ class BumpsController {
           message: 'Bump not found'
         })
       }
-
     } catch (error) {
       res.status(500).json({
         status: 'error',
@@ -53,8 +51,7 @@ class BumpsController {
     }
   }
 
-  async create(req: express.Request, res: express.Response): Promise<void> {
-
+  async create(req: any, res: express.Response): Promise<void> {
     const user = req.user as UserModelType
 
     try {
@@ -78,7 +75,6 @@ class BumpsController {
           data: bump
         })
       }
-
     } catch (error) {
       res.status(500).json({
         status: 'error',
@@ -87,8 +83,7 @@ class BumpsController {
     }
   }
 
-  async delete(req: express.Request, res: express.Response): Promise<void> {
-
+  async delete(req: any, res: express.Response): Promise<void> {
     const user = req.user as UserModelType
 
     try {
@@ -101,7 +96,7 @@ class BumpsController {
         }
 
         const bump = await BumpModel.findOne({ _id: bumpId })
-        
+
         if (bump) {
           if (bump.user.toString() === user._id.toString()) {
             bump.remove()
@@ -109,13 +104,10 @@ class BumpsController {
           } else {
             res.status(403).send()
           }
-
         } else {
           res.status(404).send()
         }
-
       }
-
     } catch (error) {
       res.status(500).json({
         status: 'error',
@@ -124,6 +116,39 @@ class BumpsController {
     }
   }
 
+  async update(req: any, res: express.Response): Promise<void> {
+    const user = req.user as UserModelType
+
+    try {
+      if (user) {
+        const bumpId = req.params.id
+
+        if (!isValidObjectId(bumpId)) {
+          res.status(400).send()
+          return
+        }
+
+        const bump = await BumpModel.findOne({ _id: bumpId })
+
+        if (bump) {
+          if (bump.user.toString() === user._id.toString()) {
+            bump.text = req.body.text
+            bump.save()
+            res.send()
+          } else {
+            res.status(403).send()
+          }
+        } else {
+          res.status(404).send()
+        }
+      }
+    } catch (error) {
+      res.status(500).json({
+        status: 'error',
+        message: JSON.stringify(error)
+      })
+    }
+  }
 }
 
 export const BumpsCtrl = new BumpsController()

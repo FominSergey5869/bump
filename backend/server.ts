@@ -21,16 +21,15 @@ app.get('/users', UserCtrl.index)
 app.get('/users/me', passport.authenticate('jwt'), UserCtrl.getUserInfo)
 app.get('/users/:id', UserCtrl.show)
 
-
 app.get('/bumps', BumpsCtrl.index)
 app.get('/bumps/:id', BumpsCtrl.show)
 app.delete('/bumps/:id', passport.authenticate('jwt'), BumpsCtrl.delete)
+app.patch('/bumps/:id', passport.authenticate('jwt'), bumpsValidations, BumpsCtrl.update)
 app.post('/bumps', passport.authenticate('jwt'), bumpsValidations, BumpsCtrl.create)
 
 app.get('/auth/verify', registerValidations, UserCtrl.verify)
 app.post('/auth/register', registerValidations, UserCtrl.create)
 app.post('/auth/login', passport.authenticate('local'), UserCtrl.login)
-
 
 app.listen(process.env.PORT, (): void => {
   console.log('SERVER RUNNED ON PORT:', process.env.PORT)
