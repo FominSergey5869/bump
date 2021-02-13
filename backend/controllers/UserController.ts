@@ -1,12 +1,12 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import { validationResult } from 'express-validator'
-import { UserModel, UserModelType } from '../models/UserModel'
+import { UserModel, UserModelDocumentType } from '../models/UserModel'
 import { generateMD5 } from '../utils/generateHash'
 import { sendEmail } from '../utils/sendEmail'
+import { isValidObjectId } from '../utils/isValidObjectId'
 
-const isValidObjectId = mongoose.Types.ObjectId.isValid
+
 
 class UserController {
   async index(_: any, res: express.Response): Promise<void> {
@@ -29,6 +29,7 @@ class UserController {
   async show(req: express.Request, res: express.Response): Promise<void> {
     try {
       const userId = req.params.id
+
       if (!isValidObjectId(userId)) {
         res.status(400).send()
         return
@@ -36,11 +37,11 @@ class UserController {
 
       const user = await UserModel.findOne({ _id: userId }).exec()
 
-
       if (!isValidObjectId(userId)) {
         res.status(404).send()
         return
       }
+
       res.json({
         status: 'succes',
         data: user
@@ -78,7 +79,7 @@ class UserController {
         to: data.email,
         subject: 'Confirm email address to BUMP!',
         html: `To confirm your email follow 
-              <a href='http://localhost:${process.env.PORT || 8888}/users/verify?hash=${data.confirmHash}'>
+              <a href='http://localhost:${process.env.PORT || 8888}/auth/verify?hash=${data.confirmHash}'>
               to this link
               </a>`
       },
@@ -107,6 +108,7 @@ class UserController {
   async verify(req: express.Request, res: express.Response): Promise<void> {
     try {
       const hash = req.query.hash.toString()
+
       console.log(hash)
       if (!hash) {
         res.status(400).send()
@@ -137,7 +139,9 @@ class UserController {
   }
 
   async login(req: express.Request, res: express.Response): Promise<void> {
-    const user = req.user ? (req.user as UserModelType).toJSON() : undefined
+
+    const user = req.user ? (req.user as UserModelDocumentType).toJSON() : undefined
+
     try {
       res.json({
         status: 'success',
@@ -155,7 +159,9 @@ class UserController {
   }
 
   async getUserInfo(req: express.Request, res: express.Response): Promise<void> {
-    const user = req.user ? (req.user as UserModelType).toJSON() : undefined
+
+    const user = req.user ? (req.user as UserModelDocumentType).toJSON() : undefined
+
     try {
       res.json({
         status: 'success',

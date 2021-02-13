@@ -1,6 +1,7 @@
 import { model, Schema, Document } from 'mongoose'
 
-export interface UserModelType extends Document {
+export interface UserModelType {
+  _id?: string
   email: string
   fullname: string
   username: string
@@ -11,6 +12,8 @@ export interface UserModelType extends Document {
   about?: string
   website?: string
 }
+
+export type UserModelDocumentType = UserModelType & Document
 
 const UserSchema = new Schema({
   email: {
@@ -52,4 +55,4 @@ UserSchema.set('toJSON', {
   }
 })
 
-export const UserModel = model<UserModelType>('User', UserSchema)
+export const UserModel = model<UserModelDocumentType>('User', UserSchema)
