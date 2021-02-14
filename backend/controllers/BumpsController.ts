@@ -7,7 +7,7 @@ import { isValidObjectId } from '../utils/isValidObjectId'
 class BumpsController {
   async index(_: any, res: express.Response): Promise<void> {
     try {
-      const bumps = await BumpModel.find({}).exec()
+      const bumps = await BumpModel.find({}).populate('user').sort('-createdAt').exec()
 
       res.json({
         status: 'succes',
@@ -30,7 +30,7 @@ class BumpsController {
         return
       }
 
-      const bump = await BumpModel.findOne({ _id: bumpId }).exec()
+      const bump = await BumpModel.findOne({ _id: bumpId }).populate('user').exec()
 
       if (bump) {
         res.json({
@@ -72,7 +72,7 @@ class BumpsController {
 
         res.json({
           status: 'succes',
-          data: bump
+          data: await bump.populate('user').execPopulate()
         })
       }
     } catch (error) {

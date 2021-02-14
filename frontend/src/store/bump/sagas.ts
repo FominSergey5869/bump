@@ -3,16 +3,13 @@ import { BumpActions, FetchBumpType, setBump, setBumpLoadingStatus } from './act
 import { BumpsAPI } from '../../services/api/bumpsAPI'
 import { BumpDataType, LoadingStatus } from './types'
 
-
 export function* fetchBumpRequest({ payload: bumpId }: FetchBumpType) {
   try {
-    const data : BumpDataType = yield call(BumpsAPI.fetchBumpData, bumpId)
-    console.log(bumpId)
+    const data: BumpDataType = yield call(BumpsAPI.fetchBumpData, bumpId)
     yield put(setBump(data))
   } catch (error) {
     yield put(setBumpLoadingStatus(LoadingStatus.ERROR))
   }
-
 }
 
 export function* bumpSaga() {

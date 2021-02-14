@@ -1,8 +1,9 @@
-import axios from 'axios'
+import { axios } from '../../core/axios'
 import { TopicType } from '../../store/topics/types'
 
 export const TopicsAPI = {
-  fetchTopics(): Promise<TopicType[]> {
-    return axios.get('/topics').then(({ data }) => data)
+  async fetchTopics(): Promise<TopicType[]> {
+    const { data } = await axios.get('/topics')
+    return data
   }
 }
