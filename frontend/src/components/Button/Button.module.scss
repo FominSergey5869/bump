@@ -1,0 +1,12 @@
+.red {
+  background-color: red;
+  &.kek {
+    border: 2px solid green;
+  }
+  & .lol {
+    border: 2px solid green;
+  }
+  & > span {
+    border: 2px solid yellow;
+  }
+}

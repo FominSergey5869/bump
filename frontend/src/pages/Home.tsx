@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import Button from '../components/Button/Button'
+
 import { fetchBumps } from '../store/bumps/actions'
 
 import { selectBumpsItems, selectIsBumpsLoading } from '../store/bumps/selectors'
@@ -16,6 +18,7 @@ function Home() {
 
   return (
     <div>
+      <Button>Lol</Button>
       {isBumpsLoading ? (
         <div>BUMPS LOADING</div>
       ) : (
