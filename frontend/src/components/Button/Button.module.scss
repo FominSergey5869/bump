@@ -1,12 +1,18 @@
-.red {
-  background-color: red;
-  &.kek {
-    border: 2px solid green;
-  }
-  & .lol {
-    border: 2px solid green;
-  }
-  & > span {
-    border: 2px solid yellow;
+.btn {
+  font-weight: 600;
+  font-size: 14px;
+  color: #000000;
+  background-color: white;
+  border: none;
+  height: 32px;
+  padding: 0 30px;
+  border-radius: 100px;
+
+  cursor: pointer;
+  box-sizing: content-box;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  &:hover {
+    color: white;
+    background-color: #333333;
   }
 }

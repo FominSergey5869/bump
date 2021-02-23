@@ -1,18 +1,16 @@
 import React from 'react'
-import cn from 'classnames'
 import css from './Button.module.scss'
 
 type ButtonType = {
   children: React.ReactNode
+  onClick: () => void
 }
 
-const Button = ({ children }: ButtonType) => {
-  console.log(css)
+const Button = ({ children, onClick }: ButtonType) => {
   return (
-    <div className={cn(css.red, { [css.kek]: true })}>
+    <button className={css.btn} onClick={onClick}>
       {children}
-      <span>azzaza</span>
-    </div>
+    </button>
   )
 }
 

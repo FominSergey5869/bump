@@ -1,0 +1,22 @@
+.layout {
+  width: 940px;
+  max-width: 100%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper {
+  flex: 0 1 540px;
+  margin: 40px auto 0 auto;
+}
+
+.menu {
+  width: 140px;
+  border: 1px solid white;
+}
+
+.trends {
+  width: 220px;
+  border: 1px solid white;
+}
