@@ -1,3 +1,5 @@
+$black: #000;
+
 *,
 *::before,
 *::after {
@@ -21,7 +23,7 @@ li,
 figure,
 figcaption,
 blockquote,
-Ц dd {
+dd {
   margin: 0;
 }
 

@@ -3,7 +3,7 @@ import { TopicsActions, setTopics, setTopicsLoadingStatus } from './actions'
 import { TopicsAPI } from '../../services/api/topicsAPI'
 import { LoadingStatus } from './types'
 
-export function* fetchTopicsRequest() {
+export function* fetchTopicsRequest(): any {
   try {
     const items = yield call(TopicsAPI.fetchTopics)
     yield put(setTopics(items))

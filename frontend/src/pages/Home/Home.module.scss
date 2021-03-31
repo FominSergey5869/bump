@@ -1,0 +1,10 @@
+.sendBump {
+  display: flex;
+  &__avatar {
+    flex: 0 0 45px;
+  }
+  &__form {
+    flex: 1 1 auto;
+    margin: 0 0 0 12px;
+  }
+}

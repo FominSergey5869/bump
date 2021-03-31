@@ -15,4 +15,9 @@
     color: white;
     background-color: #333333;
   }
+  &:disabled {
+    color: #9c9ca4;
+    background-color: grey;
+    cursor: default;
+  }
 }

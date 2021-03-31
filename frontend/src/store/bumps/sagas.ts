@@ -1,9 +1,16 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { FetchAddBumpType, BumpsActions, setBumps, setBumpsLoadingStatus, addBump } from './actions'
+import {
+  FetchAddBumpType,
+  BumpsActions,
+  setBumps,
+  setBumpsLoadingStatus,
+  addBump,
+  setAddBumpLoadingStatus,
+} from './actions'
 import { BumpsAPI } from '../../services/api/bumpsAPI'
 import { LoadingStatus } from './types'
 
-export function* fetchBumpsRequest() {
+export function* fetchBumpsRequest(): any {
   try {
     const items = yield call(BumpsAPI.fetchBumps)
     yield put(setBumps(items))
@@ -12,12 +19,12 @@ export function* fetchBumpsRequest() {
   }
 }
 
-export function* fetchAddBumpRequest({ payload: text }: FetchAddBumpType) {
+export function* fetchAddBumpRequest({ payload: text }: FetchAddBumpType): any {
   try {
     const item = yield call(BumpsAPI.addBumpData, text)
     yield put(addBump(item))
   } catch (error) {
-    yield put(setBumpsLoadingStatus(LoadingStatus.ERROR))
+    yield put(setAddBumpLoadingStatus(LoadingStatus.ERROR))
   }
 }
 
