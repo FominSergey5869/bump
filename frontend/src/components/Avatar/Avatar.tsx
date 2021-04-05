@@ -3,11 +3,13 @@ import css from './Avatar.module.scss'
 type Props = {
   src?: string
 }
-export const Avatar = ({ src }: Props) => {
+const Avatar = ({ src }: Props) => {
   return (
     <div
       className={css.container}
-      style={{ backgroundImage: src ? `url(${src})` : '/avatar.jpg' }}
+      style={{ backgroundImage: src ? `url(${src})` : 'url(/avatar.jpg)' }}
     ></div>
   )
 }
+
+export default Avatar

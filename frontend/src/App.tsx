@@ -4,6 +4,7 @@ import Signin from './pages/Signin'
 
 import Layout from './layouts/Layout'
 import Home from './pages/Home/Home'
+import Bump from './pages/Bump/BumpPage'
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <Layout>
         <Switch>
           <Route path='/signin' component={Signin} />
-          <Route path='/' component={Home} />
+          <Route path='/home' component={Home} />
+          <Route path='/bump/:id' component={Bump} />
         </Switch>
       </Layout>
     </div>

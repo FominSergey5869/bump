@@ -13,6 +13,8 @@ export type BumpDataType = {
     username: string,
     avatarUrl: string
   }
+  createdAt: string
+  updatedAt: string
 }
 
 export type BumpType = {

@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Avatar } from '../../components/Avatar/Avatar'
+import Avatar from '../../components/Avatar/Avatar'
+import Bump from '../../components/Bump/Bump'
 import { SendBump } from '../../components/Forms/SendBump/SendBump'
 import PageHead from '../../components/PageHead/PageHead'
 import { fetchBumps } from '../../store/bumps/actions'
@@ -19,7 +20,6 @@ function Home() {
   }, [dispatch])
   const bumps = useSelector(selectBumpsItems)
   const isBumpsLoading = useSelector(selectIsBumpsLoading)
-
   return (
     <>
       <PageHead title='Home' />
@@ -38,11 +38,7 @@ function Home() {
         bumps &&
         bumps.map((el) => {
           return (
-            <div key={el._id}>
-              <b>{`Имя: ${el.user.fullname}`}</b>
-              <img src={el.user.avatarUrl} alt='avatar' />
-              {el.text}
-            </div>
+            <Bump {...el}/>
           )
         })
       )}

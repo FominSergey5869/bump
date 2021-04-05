@@ -1,0 +1,33 @@
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+.bump {
+  position: relative;
+  &__menu {
+    position: absolute;
+    top: 13px;
+    right: 15px;
+  }
+}
+.container {
+  display: flex;
+  padding: 15px;
+  &__avatar {
+    flex: 0 0 45px;
+  }
+  &__main {
+    flex: 1 1 auto;
+    margin: 0 0 0 15px;
+    &__head {
+      display: flex;
+      align-items: center;
+      & > span {
+        padding: 0 3px;
+      }
+      & > b {
+        padding: 0 5px 0 0;
+      }
+    }
+  }
+}
