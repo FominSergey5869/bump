@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Avatar from '../../components/Avatar/Avatar'
 import Bump from '../../components/Bump/Bump'
-import { SendBump } from '../../components/Forms/SendBump/SendBump'
+import { SendBump } from '../../containers/Forms/SendBump/SendBump'
 import PageHead from '../../components/PageHead/PageHead'
 import { fetchBumps } from '../../store/bumps/actions'
 import {
@@ -37,9 +37,7 @@ function Home() {
       ) : (
         bumps &&
         bumps.map((el) => {
-          return (
-            <Bump {...el}/>
-          )
+          return <Bump {...el} />
         })
       )}
     </>

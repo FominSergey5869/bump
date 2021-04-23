@@ -1,5 +1,8 @@
 import React from 'react'
 import { CSSTransition } from 'react-transition-group'
+
+import OutsideClickHandler from 'react-outside-click-handler'
+
 import Icon from '../Icon'
 
 import Portal from '../Portal/Portal'
@@ -28,14 +31,16 @@ const Modal = ({ children, isOpen, onClose }: Props) => {
         }}
         unmountOnExit
       >
-        <Portal>
+        <Portal id='modal-root-portal'>
           <div className={css.modalOverlay} ref={nodeRef}>
+          <OutsideClickHandler onOutsideClick={onClose}>
             <div className={css.modalWindow}>
               <button className={css.close} onClick={() => onClose()}>
                 <Icon name='close' />
               </button>
               <div>{children}</div>
             </div>
+            </OutsideClickHandler>
           </div>
         </Portal>
       </CSSTransition>

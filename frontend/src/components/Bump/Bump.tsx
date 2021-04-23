@@ -15,11 +15,9 @@ const Bump = ({ _id, text, user, createdAt }: BumpType) => {
           </div>
           <div className={css.container__main}>
             <div className={css.container__main__head}>
-              <div className={css.container__main__head__left}>
-                <b>{user.fullname}</b> <span>{`@${user.username}`}</span>
-                <span>·</span>
-                <span>{formatDate(new Date(createdAt))}</span>
-              </div>
+              <b>{user.fullname}</b> <span>{`@${user.username}`}</span>
+              <span>·</span>
+              <span>{formatDate(new Date(createdAt))}</span>
             </div>
             <p>{text}</p>
           </div>

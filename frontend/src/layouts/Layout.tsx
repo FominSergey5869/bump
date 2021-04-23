@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Menu from '../components/Menu/Menu'
 import css from './Layout.module.scss'
 type Props = {

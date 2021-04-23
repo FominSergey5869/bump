@@ -1,0 +1,24 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  &__logo {
+    width: 380px;
+    height: 253px;
+    margin: 0 0 65px 0;
+    padding: 0 30px;
+
+    @media (max-width: 440px) {
+      width: 100%;
+    }
+  }
+  &__buttons {
+    width: 200px;
+    & > div {
+      margin: 0 0 22px 0;
+    }
+  }
+}

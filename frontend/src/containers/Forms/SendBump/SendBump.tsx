@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAddBump } from '../../../store/bumps/actions'
 import { selectIsBumpStatusLoading } from '../../../store/bumps/selectors'
 
-import Button from '../../Button/Button'
-import Icon from '../../Icon'
+import Button from '../../../components/Button/Button'
+import Icon from '../../../components/Icon'
 import TextAreaInput from '../Fields/TextAreaInput/TextAreaInput'
 
 import { composeValidators, maxBumpLength, required } from '../Validators'
@@ -19,7 +19,6 @@ export const SendBump = () => {
   const dispatch = useDispatch()
   const isBumpLoading = useSelector(selectIsBumpStatusLoading)
   const onSubmit = async (values: Values) => {
-    console.log(values)
     dispatch(fetchAddBump(values.bumptext))
   }
 

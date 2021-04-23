@@ -4,6 +4,11 @@
 }
 .bump {
   position: relative;
+  border-radius: 7px;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: #181818;
+  }
   &__menu {
     position: absolute;
     top: 13px;

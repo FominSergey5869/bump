@@ -9,7 +9,6 @@
   border-radius: 100px;
 
   cursor: pointer;
-  box-sizing: content-box;
   transition: background-color 0.2s ease, color 0.2s ease;
   &:hover {
     color: white;
@@ -19,5 +18,20 @@
     color: #9c9ca4;
     background-color: grey;
     cursor: default;
+  }
+
+  &.wide {
+    width: 100%;
+  }
+
+  &.secondary {
+    background-color: #000000;
+    border: 1px solid white;
+    color: white;
+
+    &:hover {
+      background-color: white;
+      color: black;
+    }
   }
 }

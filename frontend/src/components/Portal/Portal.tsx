@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 type Props = {
   children: React.ReactNode
@@ -13,7 +13,7 @@ const Portal = ({ children, id = 'root-portal', el = 'div' }: Props) => {
 
   container.classList.add(id)
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.body.appendChild(container)
     return () => {
       document.body.removeChild(container)
