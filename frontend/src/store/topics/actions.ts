@@ -1,4 +1,5 @@
-import { TopicType, LoadingStatus } from "./types";
+import { LoadingStatus } from "../types";
+import { TopicType } from "./types";
 
 export enum TopicsActions {
   SET_TOPICS = 'topics/SET_TOPICS',

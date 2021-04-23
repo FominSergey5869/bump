@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import Avatar from '../../components/Avatar/Avatar'
 import Bump from '../../components/Bump/Bump'
 import { SendBump } from '../../containers/Forms/SendBump/SendBump'
@@ -10,34 +10,45 @@ import {
   selectIsBumpsLoading,
 } from '../../store/bumps/selectors'
 
+import { selectIsAuthentification } from '../../store/user/selectors'
+import { RootStateType } from '../../store'
+
 import css from './Home.module.scss'
+
+const selector = (state: RootStateType) => ({
+  isAuthentification: selectIsAuthentification(state),
+  bumps: selectBumpsItems(state),
+  isBumpsLoading: selectIsBumpsLoading(state),
+})
 
 function Home() {
   const dispatch = useDispatch()
-
+  const { isAuthentification, bumps, isBumpsLoading } = useSelector(selector, shallowEqual)
   useEffect(() => {
     dispatch(fetchBumps())
   }, [dispatch])
-  const bumps = useSelector(selectBumpsItems)
-  const isBumpsLoading = useSelector(selectIsBumpsLoading)
+
   return (
     <>
       <PageHead title='Home' />
-      <div className={css.sendBump}>
-        <div className={css.sendBump__avatar}>
-          <Avatar />
+      {isAuthentification && (
+        <div className={css.sendBump}>
+          <div className={css.sendBump__avatar}>
+            <Avatar />
+          </div>
+
+          <div className={css.sendBump__form}>
+            <SendBump />
+          </div>
         </div>
-        <div className={css.sendBump__form}>
-          <SendBump />
-        </div>
-      </div>
+      )}
 
       {isBumpsLoading ? (
         <div>BUMPS LOADING</div>
       ) : (
         bumps &&
         bumps.map((el) => {
-          return <Bump {...el} />
+          return <Bump key={el._id} {...el} />
         })
       )}
     </>

@@ -1,4 +1,5 @@
-import { BumpDataType, LoadingStatus } from "./types";
+import { LoadingStatus } from "../types";
+import { BumpDataType } from "./types";
 
 export enum BumpActions {
   SET_BUMP = 'bumps/SET_BUMP',

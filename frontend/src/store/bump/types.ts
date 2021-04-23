@@ -1,16 +1,11 @@
-export enum LoadingStatus {
-  LOADING = 'LOADING',
-  LOADED = 'LOADED',
-  NEVER = 'NEVER',
-  ERROR = 'ERROR'
-}
+import { LoadingStatus } from '../types'
 
 export type BumpDataType = {
-  _id: string,
-  text: string,
+  _id: string
+  text: string
   user: {
-    fullname: string,
-    username: string,
+    fullname: string
+    username: string
     avatarUrl: string
   }
   createdAt: string
@@ -18,6 +13,6 @@ export type BumpDataType = {
 }
 
 export type BumpType = {
-  data?: BumpDataType,
+  data?: BumpDataType
   loadingStatus: LoadingStatus
 }

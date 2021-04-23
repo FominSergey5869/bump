@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Route, Switch } from 'react-router-dom'
 import WelcomPage from './pages/WelcomePage/WelcomPage'
 
@@ -6,8 +8,16 @@ import Home from './pages/Home/Home'
 import Bump from './pages/Bump/BumpPage'
 
 import Notification from './components/Notification/Notification'
+import { fetchUser } from './store/user/actions'
+
+
 
 function App() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, [dispatch])
+
   return (
     <div className='App'>
       <Notification />

@@ -1,7 +1,8 @@
 import produce, { Draft } from 'immer'
 
-import { TopicsType, LoadingStatus } from './types'
+import { TopicsType } from './types'
 import { TopicsActionsTypes, TopicsActions } from './actions'
+import { LoadingStatus } from '../types'
 
 const initialState: TopicsType = {
   items: [],

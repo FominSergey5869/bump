@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 import { RootStateType } from "..";
-import { TopicsType, LoadingStatus } from "./types";
+import { LoadingStatus } from "../types";
+import { TopicsType } from "./types";
 
 export const selectTopics = (state: RootStateType) : TopicsType => state.topics
 

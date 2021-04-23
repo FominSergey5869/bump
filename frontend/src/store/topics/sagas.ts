@@ -1,7 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { TopicsActions, setTopics, setTopicsLoadingStatus } from './actions'
 import { TopicsAPI } from '../../services/api/topicsAPI'
-import { LoadingStatus } from './types'
+import { LoadingStatus } from '../types'
 
 export function* fetchTopicsRequest(): any {
   try {

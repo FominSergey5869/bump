@@ -1,9 +1,4 @@
-export enum LoadingStatus {
-  LOADING = 'LOADING',
-  LOADED = 'LOADED',
-  NEVER = 'NEVER',
-  ERROR = 'ERROR'
-}
+import { LoadingStatus } from "../types"
 
 export type BumpType = {
   _id: string,

@@ -1,7 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import { BumpActions, FetchBumpType, setBump, setBumpLoadingStatus } from './actions'
 import { BumpsAPI } from '../../services/api/bumpsAPI'
-import { BumpDataType, LoadingStatus } from './types'
+import { BumpDataType } from './types'
+import { LoadingStatus } from '../types'
 
 export function* fetchBumpRequest({ payload: bumpId }: FetchBumpType) {
   try {

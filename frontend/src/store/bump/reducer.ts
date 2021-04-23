@@ -1,7 +1,8 @@
 import produce, { Draft } from 'immer'
 
-import { BumpType, LoadingStatus } from './types'
+import { BumpType } from './types'
 import { BumpActionsTypes, BumpActions } from './actions'
+import { LoadingStatus } from '../types'
 
 const initialState: BumpType = {
   data: undefined,

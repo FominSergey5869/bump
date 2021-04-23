@@ -1,6 +1,7 @@
 import { createSelector } from "reselect";
 import { RootStateType } from "..";
-import { BumpType, LoadingStatus } from "./types";
+import { LoadingStatus } from "../types";
+import { BumpType } from "./types";
 
 export const selectBump = (state: RootStateType) : BumpType => state.bump
 

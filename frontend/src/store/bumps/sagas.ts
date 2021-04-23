@@ -8,7 +8,8 @@ import {
   setAddBumpLoadingStatus,
 } from './actions'
 import { BumpsAPI } from '../../services/api/bumpsAPI'
-import { LoadingStatus } from './types'
+import { LoadingStatus } from '../types'
+
 
 export function* fetchBumpsRequest(): any {
   try {
