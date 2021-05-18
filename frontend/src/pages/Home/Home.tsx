@@ -2,8 +2,11 @@ import { useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import Avatar from '../../components/Avatar/Avatar'
 import Bump from '../../components/Bump/Bump'
-import { SendBump } from '../../containers/Forms/SendBump/SendBump'
+import Preloader from '../../components/Preloader/Preloader'
 import PageHead from '../../components/PageHead/PageHead'
+
+import { SendBump } from '../../containers/Forms/SendBump/SendBump'
+
 import { fetchBumps } from '../../store/bumps/actions'
 import {
   selectBumpsItems,
@@ -23,7 +26,10 @@ const selector = (state: RootStateType) => ({
 
 function Home() {
   const dispatch = useDispatch()
-  const { isAuthentification, bumps, isBumpsLoading } = useSelector(selector, shallowEqual)
+  const { isAuthentification, bumps, isBumpsLoading } = useSelector(
+    selector,
+    shallowEqual
+  )
   useEffect(() => {
     dispatch(fetchBumps())
   }, [dispatch])
@@ -44,10 +50,11 @@ function Home() {
       )}
 
       {isBumpsLoading ? (
-        <div>BUMPS LOADING</div>
+        <div className={css.center}>
+          <Preloader />
+        </div>
       ) : (
-        bumps &&
-        bumps.map((el) => {
+        bumps?.map((el) => {
           return <Bump key={el._id} {...el} />
         })
       )}

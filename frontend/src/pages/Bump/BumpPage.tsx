@@ -1,8 +1,9 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import Bump from '../../components/Bump/Bump'
+import Preloader from '../../components/Preloader/Preloader'
 
 import { fetchBump } from '../../store/bump/actions'
 import { selectBumpData, selectIsBumpLoading } from '../../store/bump/selectors'
@@ -25,7 +26,7 @@ function BumpPage() {
   console.log(bump)
   return (
     <>
-      {isLoading && 'LOADING'}
+      {isLoading &&  <Preloader />}
       {!isLoading && bump && <Bump {...bump} />}
     </>
   )

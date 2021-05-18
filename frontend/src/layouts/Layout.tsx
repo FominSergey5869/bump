@@ -1,5 +1,5 @@
 import Menu from '../components/Menu/Menu'
-import { UserMenu } from '../containers/UserMenu/UserMenu'
+import UserMenu from '../containers/UserMenu/UserMenu'
 import css from './Layout.module.scss'
 type Props = {
   children: React.ReactNode
@@ -10,6 +10,7 @@ const Layout = ({ children }: Props) => {
       <div>
         <UserMenu />
       </div>
+
       <div className={css.layout}>
         <div className={css.menu}>
           <Menu />
