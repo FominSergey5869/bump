@@ -16,6 +16,6 @@ export type UserDataType = {
 
 
 export type UserType = {
- data: UserDataType | undefined
+ data: UserDataType
  loadingStatus: LoadingStatus
 }

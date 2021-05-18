@@ -9,9 +9,12 @@ export const selectUserData = (state: RootStateType): UserType['data'] =>
 
 export const selectIsUserLoading = (state: RootStateType): boolean =>
   selectUser(state).loadingStatus === LoadingStatus.LOADING
-  
+
 export const selectIsUserLoaded = (state: RootStateType): boolean =>
   selectUser(state).loadingStatus === LoadingStatus.LOADED
+
+export const selectIsUserError = (state: RootStateType): boolean =>
+  selectUser(state).loadingStatus === LoadingStatus.ERROR
 
 export const selectIsAuthentification = (state: RootStateType): boolean =>
   !!selectUser(state).data?.confirmed

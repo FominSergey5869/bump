@@ -14,7 +14,7 @@ import { setNotification } from '../../store/notification/actions'
 
 import {
   selectIsAuthentification,
-  selectIsUserLoaded,
+  selectIsUserError,
 } from '../../store/user/selectors'
 
 import css from './WelcomePage.module.scss'
@@ -24,10 +24,10 @@ const WelcomPage = () => {
 
   const history = useHistory()
   const dispatch = useDispatch()
-  const { isAuthentification, isUserLoaded } = useSelector(
+  const { isAuthentification, isNoUser } = useSelector(
     (state: RootStateType) => ({
       isAuthentification: selectIsAuthentification(state),
-      isUserLoaded: selectIsUserLoaded(state),
+      isNoUser: selectIsUserError(state),
     }),
     shallowEqual
   )
@@ -35,16 +35,8 @@ const WelcomPage = () => {
   useEffect(() => {
     if (isAuthentification) {
       history.push('/home')
-    } else if (isUserLoaded) {
-      history.push('/home')
-      dispatch(
-        setNotification({
-          type: 'warning',
-          message: 'Email has been sent to your email',
-        })
-      )
     }
-  }, [isAuthentification, isUserLoaded, history])
+  }, [isAuthentification, history, dispatch])
 
   return (
     <>
@@ -54,23 +46,29 @@ const WelcomPage = () => {
       <Modal isOpen={signUp} onClose={() => setSignUp(false)}>
         <Signup />
       </Modal>
-      <div className={css.container}>
-        <div className={css.container__logo}>
-          <Icon name='logo' width='100%' height='100%' />
-        </div>
-        <div className={css.container__buttons}>
-          <div>
-            <Button wide={true} primary={false} onClick={() => setSignUp(true)}>
-              Sign up
-            </Button>
+      {isNoUser && (
+        <div className={css.container}>
+          <div className={css.container__logo}>
+            <Icon name='logo' width='100%' height='100%' />
           </div>
-          <div>
-            <Button wide={true} onClick={() => setLogIn(true)}>
-              Log in
-            </Button>
+          <div className={css.container__buttons}>
+            <div>
+              <Button
+                wide={true}
+                primary={false}
+                onClick={() => setSignUp(true)}
+              >
+                Sign up
+              </Button>
+            </div>
+            <div>
+              <Button wide={true} onClick={() => setLogIn(true)}>
+                Log in
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

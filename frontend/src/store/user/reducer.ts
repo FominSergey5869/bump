@@ -5,7 +5,14 @@ import { UserActionsTypes, UserActions } from './actions'
 import { LoadingStatus } from '../types'
 
 const initialState: UserType = {
-  data: undefined,
+  data: {
+    _id: '',
+    username: '',
+    confirmed: false,
+    fullname: '',
+    email: '',
+    token: '',
+  },
   loadingStatus: LoadingStatus.NEVER,
 }
 
