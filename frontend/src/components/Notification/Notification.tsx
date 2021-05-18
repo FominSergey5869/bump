@@ -46,7 +46,7 @@ const Notification = () => {
       >
         <Portal id='notification-root-portal'>
           <div className={css.container} ref={nodeRef} onClick={onClose}>
-            {data.message}
+            {data?.message}
           </div>
         </Portal>
       </CSSTransition>

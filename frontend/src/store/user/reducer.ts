@@ -16,6 +16,9 @@ const userReducer = produce(
         draft.data = action.payload
         draft.loadingStatus = LoadingStatus.LOADED
         break
+      case UserActions.SIGNUP_USER:
+        draft.loadingStatus = LoadingStatus.LOADING
+        break
       case UserActions.LOGIN_USER:
         draft.loadingStatus = LoadingStatus.LOADING
         break

@@ -1,4 +1,4 @@
-import { AuthData } from '../../services/api/authAPI'
+import { AuthData, SignupData } from '../../services/api/authAPI'
 import { LoadingStatus } from '../types'
 import { UserDataType } from './types'
 
@@ -6,6 +6,7 @@ export enum UserActions {
   SET_USER = 'user/SET_USER',
   FETCH_USER = 'user/FETCH_USER',
   LOGIN_USER = 'user/LOGIN_USER',
+  SIGNUP_USER = 'user/SIGNUP_USER',
   SET_LOADING_STATUS = 'user/SET_LOADING_STATUS',
 }
 
@@ -24,7 +25,7 @@ export type FetchUserType = {
 }
 
 export const fetchUser = (): FetchUserType => ({
-  type: UserActions.FETCH_USER
+  type: UserActions.FETCH_USER,
 })
 
 export type LoginUserType = {
@@ -34,6 +35,16 @@ export type LoginUserType = {
 
 export const loginUser = (payload: AuthData): LoginUserType => ({
   type: UserActions.LOGIN_USER,
+  payload,
+})
+
+export type SignupUserType = {
+  type: UserActions.SIGNUP_USER
+  payload: SignupData
+}
+
+export const signupUser = (payload: SignupData): SignupUserType => ({
+  type: UserActions.SIGNUP_USER,
   payload,
 })
 
@@ -54,3 +65,4 @@ export type UserActionsTypes =
   | SetUserLoadingStatusType
   | FetchUserType
   | LoginUserType
+  | SignupUserType

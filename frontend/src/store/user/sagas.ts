@@ -5,6 +5,7 @@ import {
   setUserData,
   setUserLoadingStatus,
   LoginUserType,
+  SignupUserType,
 } from './actions'
 import { UserAPI } from '../../services/api/userAPI'
 import { UserRequest } from './types'
@@ -36,7 +37,33 @@ export function* loginUserRequest({ payload }: LoginUserType) {
   }
 }
 
+export function* signupUserRequest({ payload }: SignupUserType) {
+  try {
+    const { data, status }: UserRequest = yield call(AuthAPI.signUp, payload)
+    if (status === 'success') {
+      yield put(setUserData(data))
+    } else {
+      yield put(
+        setNotification({
+          type: 'warning',
+          message: status,
+        })
+      )
+      yield put(setUserLoadingStatus(LoadingStatus.ERROR))
+    }
+  } catch (error) {
+    yield put(
+      setNotification({
+        type: 'warning',
+        message: 'Service error',
+      })
+    )
+    yield put(setUserLoadingStatus(LoadingStatus.ERROR))
+  }
+}
+
 export function* userSaga() {
   yield takeLatest(UserActions.FETCH_USER, fetchUserRequest)
   yield takeLatest(UserActions.LOGIN_USER, loginUserRequest)
+  yield takeLatest(UserActions.SIGNUP_USER, signupUserRequest)
 }

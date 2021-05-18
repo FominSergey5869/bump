@@ -10,10 +10,9 @@ import Bump from './pages/Bump/BumpPage'
 import Notification from './components/Notification/Notification'
 import { fetchUser } from './store/user/actions'
 
-
-
 function App() {
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(fetchUser())
   }, [dispatch])

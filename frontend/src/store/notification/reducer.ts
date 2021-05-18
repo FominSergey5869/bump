@@ -8,7 +8,7 @@ const initialState: NotificationType = {
   data: {
     type: 'neutral',
     message: '',
-  }
+  },
 }
 
 const notificationReducer = produce(
@@ -20,6 +20,7 @@ const notificationReducer = produce(
         break
       case NotificationActions.REMOVE_NOTIFICATION:
         draft.isShow = false
+        draft.data = undefined
         break
       default:
         break

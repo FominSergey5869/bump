@@ -34,3 +34,13 @@
   transform:  translateY(-110%);
   transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
 }
+
+@media (max-width: 360px) {
+  .container {
+    position: fixed;
+    top: 5px;
+    left: calc(50% - 48vw);
+  
+    width: 96vw;
+  }
+}
