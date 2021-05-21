@@ -15,8 +15,11 @@ export const BumpsAPI = {
     const { data } = await axios.get<Response<BumpType>>('/bumps/' + id)
     return data.data
   },
-  async addBumpData(payload: string): Promise<BumpType> {
-    const { data } = await axios.post<Response<BumpType>>('/bumps', { text: payload })
+  async addBumpData(payload: {
+    text: string
+    images: string[]
+  }): Promise<BumpType> {
+    const { data } = await axios.post<Response<BumpType>>('/bumps', payload)
     return data.data
-  }
+  },
 }

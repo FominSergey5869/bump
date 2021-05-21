@@ -1,25 +1,51 @@
 import React from 'react'
 import { Form, Field } from 'react-final-form'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAddBump } from '../../../store/bumps/actions'
+import {
+  fetchAddBump,
+  setAddBumpLoadingStatus,
+} from '../../../store/bumps/actions'
 import { selectIsBumpStatusLoading } from '../../../store/bumps/selectors'
 
 import Button from '../../../components/Button/Button'
-import Icon from '../../../components/Icon'
 import TextAreaInput from '../Fields/TextAreaInput/TextAreaInput'
+import MultipleImg from '../Fields/MultipleImg/MultipleImg'
 
 import { composeValidators, maxBumpLength, required } from '../Validators'
 
+import { LoadingStatus } from '../../../store/types'
+
+import { uploadImage } from '../../../utils/uploadImage'
+
 import css from './SendBump.module.scss'
+
+type FileObj = {
+  url: string
+  file: File
+}
+
 type Values = {
   bumptext: string
+  images: FileObj[]
 }
 
 export const SendBump = () => {
   const dispatch = useDispatch()
   const isBumpLoading = useSelector(selectIsBumpStatusLoading)
+
   const onSubmit = async (values: Values) => {
-    dispatch(fetchAddBump(values.bumptext))
+    let urls = []
+
+    if (values.images) {
+      dispatch(setAddBumpLoadingStatus(LoadingStatus.LOADING))
+      for (let i = 0; i < values.images.length; i++) {
+        const file = values.images[i].file
+        const { url } = await uploadImage(file)
+        urls.push(url)
+      }
+    }
+
+    dispatch(fetchAddBump({ text: values.bumptext, images: urls }))
   }
 
   return (
@@ -43,23 +69,21 @@ export const SendBump = () => {
                 />
               </div>
 
+              <div className={css.field}>
+                <Field name='images' component={MultipleImg} />
+              </div>
+
               <div className={css.interface}>
-                <div className={css.interface__left}>
-                  <button className={css.interface__left__button}>
-                    <Icon name='emoji' width='25' height='25' />
-                  </button>
-                  <button className={css.interface__left__button}>
-                    <Icon name='image' width='25' height='25' />
-                  </button>
-                  <button className={css.interface__left__button}>
-                    <Icon name='file' width='25' height='25' />
-                  </button>
-                </div>
+                <div className={css.interface__left}></div>
                 <div className={css.interface__right}>
                   <span className={css.interface__right__length}>
                     {`${values.bumptext ? values.bumptext.length : 0} / 160`}
                   </span>
-                  <Button disabled={isBumpLoading || !valid} type='submit'>
+                  <Button
+                    disabled={isBumpLoading || !valid}
+                    type='submit'
+                    loading={isBumpLoading ? true : false}
+                  >
                     Bump
                   </Button>
                 </div>

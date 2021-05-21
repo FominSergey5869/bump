@@ -34,4 +34,32 @@
       color: black;
     }
   }
+
+  &.loading {
+    color: #9c9ca4;
+    background-image: linear-gradient(
+      to right,
+      #7d7d86 0%,
+      #ffffff 50%,
+      #7d7d86 100%
+    );
+    background-size: 200% auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
+    animation-name: loading;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
 }

@@ -13,7 +13,9 @@ class UploadFileController {
             message: error || 'upload error',
           })
         }
-        res.send().status(201)
+        res.status(201).json({
+          url: result.url
+        })
       })
       .end(file.buffer)
   }

@@ -9,6 +9,7 @@ type ButtonType = {
   type?: 'button' | 'reset' | 'submit' | undefined
   wide?: boolean
   primary?: boolean
+  loading?: boolean
   onClick?: () => void
 }
 
@@ -18,6 +19,7 @@ const Button = ({
   type,
   wide,
   primary = true,
+  loading = false,
   onClick,
 }: ButtonType) => {
   return (
@@ -25,7 +27,8 @@ const Button = ({
       className={cn(
         css.btn,
         { [css.wide]: wide },
-        { [css.secondary]: !primary }
+        { [css.secondary]: !primary },
+        { [css.loading]: loading }
       )}
       onClick={onClick}
       disabled={disabled}

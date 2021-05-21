@@ -30,10 +30,13 @@ export const fetchBumps = (): FetchBumpsType => ({
 
 export type FetchAddBumpType = {
   type: BumpsActions.FETCH_ADD_BUMP
-  payload: string
+  payload: { text: string; images: string[] }
 }
 
-export const fetchAddBump = (payload: string): FetchAddBumpType => ({
+export const fetchAddBump = (payload: {
+  text: string
+  images: string[]
+}): FetchAddBumpType => ({
   type: BumpsActions.FETCH_ADD_BUMP,
   payload,
 })

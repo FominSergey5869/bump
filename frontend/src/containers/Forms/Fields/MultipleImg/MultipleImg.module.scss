@@ -1,0 +1,64 @@
+.input {
+  color: white;
+  background-color: black;
+  width: 100%;
+  border: 1px solid #9c9ca4;
+  border-radius: 7px;
+  resize: none;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.button {
+  background: none;
+  border: none;
+  padding: 2px;
+  width: 50px;
+  height: 50px;
+  margin: 0 7px 10px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #9c9ca4;
+  border-radius: 7px; 
+  cursor: pointer;
+}
+
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + 14px);
+  margin: 0 0 0 -7px;
+  &__item {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    margin: 0 7px 10px 7px;
+    &__img {
+      width: 100%;
+      height: 100%;
+      border-radius: 7px;
+      overflow: hidden;
+      & > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    &__delete {
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      background: white;
+      border: none;
+      border-radius: 50%;
+      padding: 0;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  }
+}

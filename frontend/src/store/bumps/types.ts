@@ -1,13 +1,11 @@
 import { LoadingStatus } from "../types"
+import { UserDataType } from "../user/types"
 
 export type BumpType = {
   _id: string,
   text: string,
-  user: {
-    fullname: string,
-    username: string,
-    avatarUrl: string
-  }
+  images: string[],
+  user: UserDataType,
   createdAt: string
   updatedAt: string
 }

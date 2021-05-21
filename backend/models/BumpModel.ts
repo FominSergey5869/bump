@@ -4,6 +4,7 @@ export interface BumpModelType {
   _id?: string
   text: string
   user: string
+  images?: string[]
 }
 
 export type BumpModelDocumentType = BumpModelType & Document
@@ -18,7 +19,10 @@ const BumpSchema = new Schema(
       required: true,
       ref: 'User',
       type: Schema.Types.ObjectId
-    }
+    },
+    images: [{
+      type: String
+    }]
   },
   {
     timestamps: true

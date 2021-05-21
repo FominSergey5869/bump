@@ -23,7 +23,6 @@ function BumpPage() {
 
   const isLoading = useSelector(selectIsBumpLoading)
   const bump = useSelector(selectBumpData)
-  console.log(bump)
   return (
     <>
       {isLoading &&  <Preloader />}
