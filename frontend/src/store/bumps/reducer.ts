@@ -28,6 +28,9 @@ const bumpsReducer = produce(
         draft.items.unshift(action.payload)
         draft.addBumpStatus = LoadingStatus.LOADED
         break
+        case BumpsActions.REMOVE_BUMP:
+        draft.items = draft.items.filter(item => item._id !== action.payload  )
+        break
       case BumpsActions.SET_LOADING_STATUS:
         draft.loadingStatus = action.payload
         break

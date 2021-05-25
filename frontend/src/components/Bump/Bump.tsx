@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { BumpType } from '../../store/bumps/types'
 import { formatDate } from '../../utils/formatDate'
 import Avatar from '../Avatar/Avatar'
@@ -7,17 +8,31 @@ import DotsMenu from '../DotsMenu/DotsMenu'
 import ImageZoom from 'react-medium-image-zoom'
 
 import css from './Bump.module.scss'
-import { useSelector } from 'react-redux'
+
 import { selectUserData } from '../../store/user/selectors'
+import { removeBump } from '../../store/bumps/actions'
 
 const Bump = ({ _id, text, images, user, createdAt }: BumpType) => {
   const currentUser = useSelector(selectUserData)
+  const history = useHistory()
+  const dispatch = useDispatch()
   const dotsMenuData: {
     label: string
     action: () => void
   }[] = []
 
-  if (user._id === currentUser._id) dotsMenuData.push({ label: 'Remove bump', action: () => alert('kek') })
+  dotsMenuData.push({
+    label: 'Open',
+    action: () => history.push(`bump/${_id}`),
+  })
+
+  const handleRemoveBump = () => {
+    if (window.confirm('Do you really want to delete bump')) {
+      dispatch(removeBump(_id))
+    }
+  }
+  if (user._id === currentUser._id)
+    dotsMenuData.push({ label: 'Remove', action: () => handleRemoveBump() })
 
   return (
     <div className={css.bump}>
@@ -45,7 +60,7 @@ const Bump = ({ _id, text, images, user, createdAt }: BumpType) => {
                     image={{
                       src: url,
                       alt: 'bump_image',
-                      className: 'img',
+                      className: 'img--small',
                     }}
                     zoomImage={{
                       src: url,
@@ -63,7 +78,7 @@ const Bump = ({ _id, text, images, user, createdAt }: BumpType) => {
         </div>
       </Link>
       <div className={css.bump__menu}>
-        <DotsMenu />
+        <DotsMenu items={dotsMenuData} />
       </div>
     </div>
   )

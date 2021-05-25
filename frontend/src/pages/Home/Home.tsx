@@ -55,7 +55,11 @@ function Home() {
         </div>
       ) : (
         bumps?.map((el) => {
-          return <div className={css.bump}><Bump key={el._id} {...el} /></div>
+          return (
+            <div key={el._id} className={css.bump}>
+              <Bump {...el} />
+            </div>
+          )
         })
       )}
     </>

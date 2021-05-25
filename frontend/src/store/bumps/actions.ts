@@ -6,6 +6,7 @@ export enum BumpsActions {
   FETCH_BUMPS = 'bumps/FETCH_BUMPS',
   FETCH_ADD_BUMP = 'bumps/FETCH_ADD_BUMP',
   ADD_BUMP = 'bumps/ADD_BUMP',
+  REMOVE_BUMP = 'bumps/REMOVE_BUMP',
   SET_LOADING_STATUS = 'bumps/SET_LOADING_STATUS',
   SET_ADD_BUMP_LOADING_STATUS = 'bumps/SET_ADD_BUMP_LOADING_STATUS',
 }
@@ -51,6 +52,16 @@ export const addBump = (payload: BumpType): AddBumpType => ({
   payload,
 })
 
+export type RemoveBumpType = {
+  type: BumpsActions.REMOVE_BUMP
+  payload: string
+}
+
+export const removeBump = (payload: string): RemoveBumpType => ({
+  type: BumpsActions.REMOVE_BUMP,
+  payload,
+})
+
 export type SetAddBumpLoadingStatusType = {
   type: BumpsActions.SET_ADD_BUMP_LOADING_STATUS
   payload: LoadingStatus
@@ -82,3 +93,4 @@ export type BumpsActionsTypes =
   | FetchBumpsType
   | FetchAddBumpType
   | AddBumpType
+  | RemoveBumpType

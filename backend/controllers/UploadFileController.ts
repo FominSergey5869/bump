@@ -6,17 +6,28 @@ class UploadFileController {
     const file = req.file
 
     cloudinary.v2.uploader
-      .upload_stream({ resource_type: 'auto' }, (error, result) => {
-        if (error || !result) {
-          return res.status(500).json({
-            status: 'error',
-            message: error || 'upload error',
+      .upload_stream(
+        {
+          resource_type: 'auto',
+          transformation: {
+            gravity: 'face',
+            width: 720,
+            height: 720,
+            crop: 'crop',
+          },
+        },
+        (error, result) => {
+          if (error || !result) {
+            return res.status(500).json({
+              status: 'error',
+              message: error || 'upload error',
+            })
+          }
+          res.status(201).json({
+            url: result.url,
           })
         }
-        res.status(201).json({
-          url: result.url
-        })
-      })
+      )
       .end(file.buffer)
   }
 }

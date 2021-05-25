@@ -6,6 +6,8 @@ import {
   setBumpsLoadingStatus,
   addBump,
   setAddBumpLoadingStatus,
+  removeBump,
+  RemoveBumpType,
 } from './actions'
 import { BumpsAPI } from '../../services/api/bumpsAPI'
 import { LoadingStatus } from '../types'
@@ -23,8 +25,7 @@ export function* fetchBumpsRequest(): any {
 export function* fetchAddBumpRequest({ payload }: FetchAddBumpType): any {
   try {
     const item = yield call(BumpsAPI.addBumpData, payload)
-    
-    console.log(item)
+
     if (item.status === 'error')
       yield put(
         setNotification({
@@ -38,7 +39,22 @@ export function* fetchAddBumpRequest({ payload }: FetchAddBumpType): any {
   }
 }
 
+export function* fetchRemoveBumpRequest({ payload }: RemoveBumpType): any {
+  try {
+    yield call(BumpsAPI.removeBump, payload)
+  } catch (error) {
+    console.log(error)
+    yield put(
+      setNotification({
+        type: 'warning',
+        message: 'Failed to remove bump',
+      })
+    )
+  }
+}
+
 export function* bumpsSaga() {
   yield takeLatest(BumpsActions.FETCH_BUMPS, fetchBumpsRequest)
   yield takeLatest(BumpsActions.FETCH_ADD_BUMP, fetchAddBumpRequest)
+  yield takeLatest(BumpsActions.REMOVE_BUMP, fetchRemoveBumpRequest)
 }

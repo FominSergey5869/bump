@@ -6,10 +6,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25px;
-    height: 25px;
-    padding: 0 2px;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    border-radius: 12px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: #363636;
+    }
   }
 }
 
@@ -17,10 +23,25 @@
   position: absolute;
   top: 27px;
   right: 0;
-  padding: 15px;
+  padding: 10px 0;
   border-radius: 7px;
+  color: black;
   background-color: white;
   z-index: 1;
+
+  &__item {
+    border: none;
+    background: none;
+    width: 100%;
+    padding: 2px 15px;
+    white-space: nowrap;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    &:hover {
+      background-color: #cfcfdf;
+    }
+  }
 }
 
 .popup-enter {

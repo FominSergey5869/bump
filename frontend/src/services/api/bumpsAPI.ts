@@ -22,4 +22,7 @@ export const BumpsAPI = {
     const { data } = await axios.post<Response<BumpType>>('/bumps', payload)
     return data.data
   },
+  async removeBump(id: string): Promise<void> {
+    await axios.delete(`/bumps/${id}`)
+  },
 }

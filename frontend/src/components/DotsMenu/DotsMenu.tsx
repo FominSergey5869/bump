@@ -14,7 +14,7 @@ type Item = {
 type Props = {
   items?: Item[]
 }
-const DotsMenu = (props: Props) => {
+const DotsMenu = ({ items }: Props) => {
   const nodeRef = React.useRef(null)
   const [isOpen, setIsOpen] = React.useState(false)
   return (
@@ -41,7 +41,15 @@ const DotsMenu = (props: Props) => {
           unmountOnExit
         >
           <div ref={nodeRef} className={css.popup}>
-            prekol
+            {items?.map((item) => (
+              <button
+                key={item.label}
+                className={css.popup__item}
+                onClick={item.action}
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
         </CSSTransition>
       </div>
